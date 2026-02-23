@@ -1,26 +1,25 @@
-//Accordion Menu
 // exercise1.js
-
 const accordion = document.querySelector('.accordion');
+
 accordion.addEventListener('click', function(event) {
-    
- // 1. Find the closest trigger from event.target
- const trigger = event.target.closest('.accordion-trigger');
+    // 1. Find the closest trigger
+    const trigger = event.target.closest('.accordion-trigger');
+    if (!trigger) return;
 
- // If null, the click was not on a trigger - return early.
- if (!trigger) return
+    // 2. Find the closest .accordion-item (Fixed spelling and casing)
+    const currentItem = trigger.closest('.accordion-item'); 
 
- // 2. From the trigger, find the closest .accordion-item
- const currentitem = trigger.closest('.accordin-item');
+    // 3. Check if it's already open BEFORE we close everything
+    const isOpen = currentItem.classList.contains('open');
 
- // 3. Close ALL accordion items (querySelectorAll + forEach + remove class)
- const allItems = accordion.querySelectorAll('.accordion-item');
+    // 4. Close ALL accordion items
+    const allItems = accordion.querySelectorAll('.accordion-item');
     allItems.forEach(item => {
         item.classList.remove('open');
     });
 
- // 4. Toggle .open on the clicked item only
- if (!isOpen) {
+    // 5. Toggle logic: If it wasn't open, open it now
+    if (!isOpen) {
         currentItem.classList.add('open');
     }
 });
